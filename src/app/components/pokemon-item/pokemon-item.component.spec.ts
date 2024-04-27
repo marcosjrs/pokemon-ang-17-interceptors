@@ -14,6 +14,10 @@ describe('PokemonItemComponent', () => {
     
     fixture = TestBed.createComponent(PokemonItemComponent);
     component = fixture.componentInstance;
+    component.pokemonInfo = {
+      name: 'pikachu',
+      url: 'https://pokeapi.co/api/v2/pokemon/25/'
+    }
     fixture.detectChanges();
   });
 
