@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { PokemonItemComponent } from '../../components/pokemon-item/pokemon-item.component';
 import { ErrorMessageComponent } from '../../components/error-message/error-message.component';
 import { PokemonService } from '../../core/services/pokemon.service';
-import { EMPTY, Observable, catchError } from 'rxjs';
-import { PokemonResults } from '../../interfaces/pokemon';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,15 +12,13 @@ import { PokemonResults } from '../../interfaces/pokemon';
   templateUrl: './pokemon-list.component.html',
   styleUrl: './pokemon-list.component.css'
 })
-export class PokemonListComponent implements OnInit {
-  public pokemonResults$!: Observable<PokemonResults>;
+export class PokemonListComponent {
+  private service = inject(PokemonService);
   public errorMessage!: string;
-  constructor(private service: PokemonService) { }
+  public pokemonResults$ = this.service?.getPokemonList()
+  .pipe(catchError((error: string) => {
+    this.errorMessage = error;
+    return EMPTY;
+  }));
 
-  ngOnInit(): void {
-    this.pokemonResults$ = this.service.getPokemonList().pipe(catchError((error: string) => {
-      this.errorMessage = error;
-      return EMPTY;
-    }))
-  }
 }
