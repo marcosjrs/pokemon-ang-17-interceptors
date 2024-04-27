@@ -4,7 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-nav',
   standalone: true,
   imports: [],
-  templateUrl: './nav.component.html',
+  template: `
+  <nav class="pokemon-nav">
+    <h1>Pokemon interceptor</h1>
+  </nav>
+  `,
   styleUrl: './nav.component.css'
 })
 export class NavComponent {

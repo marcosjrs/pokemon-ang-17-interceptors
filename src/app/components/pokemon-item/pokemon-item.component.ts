@@ -5,7 +5,11 @@ import { Pokemon } from '../../interfaces/pokemon';
   selector: 'app-pokemon-item',
   standalone: true,
   imports: [],
-  templateUrl: './pokemon-item.component.html',
+  template: `
+  <div class="pokemon-card">
+    <p>{{ pokemonInfo.name }}</p>
+  </div>
+  `,
   styleUrl: './pokemon-item.component.css'
 })
 export class PokemonItemComponent {
